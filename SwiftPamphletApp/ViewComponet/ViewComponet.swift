@@ -7,17 +7,84 @@
 
 import SwiftUI
 import WebKit
+import MarkdownUI
 
-struct WebUIView : NSViewRepresentable {
-    
-    let html: String
-    
+struct SideBarLabel: View {
+    var title: String
+    var imageName: String
+    var body: some View {
+        HStack {
+            Image(imageName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 30)
+            Text(title)
+        }
+    }
+}
+
+// MarkdownUI
+struct MarkdownView: View {
+    var s: String
+    var body: some View {
+        Markdown(s)
+            .markdownStyle(MarkdownStyle(font:.title3))
+    }
+}
+
+// 共享菜单
+struct ShareView: View {
+    var s: String
+    var body: some View {
+        Menu {
+            Button {
+                let p = NSPasteboard.general
+                p.declareTypes([.string], owner: nil)
+                p.setString(s, forType: .string)
+            } label: {
+                Image(systemName: "doc.on.doc")
+                Text("拷贝链接")
+            }
+            Divider()
+            ForEach(NSSharingService.sharingServices(forItems: [""]), id: \.title) { item in
+                Button {
+                    item.perform(withItems: [s])
+                } label: {
+                    Image(nsImage: item.image)
+                    Text(item.title)
+                }
+            }
+        } label: {
+            Image(systemName: "square.and.arrow.up")
+            Text("分享")
+        }
+    }
+}
+
+struct WebView: NSViewRepresentable {
+    let urlStr: String
+
     func makeNSView(context: Context) -> some WKWebView {
         return WKWebView()
     }
-    
+
     func updateNSView(_ nsView: NSViewType, context: Context) {
-        nsView.loadHTMLString(html, baseURL: nil)
+        let r = URLRequest(url: URL(string: urlStr)!)
+        nsView.load(r)
+    }
+}
+
+struct WebUIView: NSViewRepresentable {
+    let html: String
+    let baseURLStr: String
+
+    func makeNSView(context: Context) -> some WKWebView {
+        return WKWebView()
+    }
+
+    func updateNSView(_ nsView: NSViewType, context: Context) {
+        let host = URL(string: baseURLStr)?.host ?? ""
+        nsView.loadHTMLString(html, baseURL: URL(string: "https://\(host)"))
     }
 }
 
@@ -26,14 +93,14 @@ struct GitHubApiTimeView: View {
     var isUnread = false
     var body: some View {
         HStack {
-            Text(timeStr.replacingOccurrences(of: "T", with: " ").replacingOccurrences(of: "Z", with: ""))
+            Text(howLongFromNow(timeStr:timeStr))
             if isUnread == true {
                 Image(systemName: "envelope.badge")
             }
         }
         .font(.system(.footnote))
         .foregroundColor(.secondary)
-        
+
     }
 }
 
@@ -55,7 +122,7 @@ struct FixAwfulPerformanceStyle: ButtonStyle {
 struct AsyncImageWithPlaceholder: View {
     enum Size {
         case tinySize, smallSize,normalSize, bigSize
-        
+
         var v: CGFloat {
             switch self {
             case .tinySize:
@@ -104,7 +171,7 @@ struct ButtonGoGitHubWeb: View {
             } else {
                 Text(text)
             }
-            
+
         }.buttonStyle(FixAwfulPerformanceStyle())
     }
 }

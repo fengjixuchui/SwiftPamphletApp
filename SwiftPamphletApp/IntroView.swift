@@ -13,10 +13,10 @@ struct IntroView: View {
             Image("logo")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 100, height: 100)
+                .frame(width: 120, height: 120)
             Text("戴铭的 Swift 小册子").bold().font(.largeTitle)
             Text("一本活的 Swift 手册")
-            Text("版本2.0").font(.footnote)
+            Text("版本4.0").font(.footnote)
         }
         .frame(minWidth: SPC.detailMinWidth)
     }

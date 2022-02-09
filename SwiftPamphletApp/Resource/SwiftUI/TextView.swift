@@ -56,12 +56,14 @@ struct TextView: View {
                 }
                 .frame(width: 200, height: 100)
         }
-            
+
         Group {
             Text("这是一段长文。总得说点什么，总得说点什么，总得说点什么，总得说点什么，总得说点什么，总得说点什么，总得说点什么，总得说点什么，总得说点什么，总得说点什么，总得说点什么，总得说点什么，总得说点什么，总得说点什么，总得说点什么，总得说点什么，总得说点什么吧。")
                 .lineLimit(3) // 对行的限制，如果多余设定行数，尾部会显示...
                 .lineSpacing(10) // 行间距
                 .multilineTextAlignment(.leading) // 对齐
         }
+//        Text(PlayFoundation.attributeString().randomElement())
+//        Text(PlayFoundation.attributeString().randomElement())
     }
 }

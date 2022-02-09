@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-
 struct NavView: View {
     var body: some View {
-        VStack {
-            IssueView(vm: IssueVM(repoName: SPC.pamphletIssueRepoName, issueNumber: 1), type: .hiddenUserInfo)
+        ScrollView {
+            MarkdownView(s: loadBundleString("1.md"))
+                .padding(20)
         }
         .frame(minWidth: SPC.detailMinWidth)
     }

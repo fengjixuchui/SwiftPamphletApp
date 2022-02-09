@@ -1,5 +1,40 @@
 [
     {
+        "title":"Swift.org",
+        "id":2201111633,
+        "des":"Swift 官方博客",
+        "siteLink":"https://www.swift.org/",
+        "feedLink":"https://www.swift.org/atom.xml"
+    },
+    {
+        "title":"Release notes from iOS-Weekly",
+        "id":2201080951,
+        "des":"老司机 iOS 周报",
+        "siteLink":"https://github.com/SwiftOldDriver/iOS-Weekly/releases",
+        "feedLink":"https://github.com/SwiftOldDriver/iOS-Weekly/releases.atom"
+    },
+    {
+        "title":"iOS摸鱼周报",
+        "id":2201071620,
+        "des":"iOS 摸鱼周报",
+        "siteLink":"https://zhangferry.com/",
+        "feedLink":"https://zhangferry.com/atom.xml"
+    },
+    {
+        "title":"Michael Tsai",
+        "id":2201111053,
+        "des":"一名 macOS 开发者的博客",
+        "siteLink":"https://mjtsai.com/blog",
+        "feedLink":"https://mjtsai.com/blog/feed/"
+    },
+    {
+        "title":"少数派",
+        "id":2201071524,
+        "des":"少数派致力于更好地运用数字产品或科学方法，帮助用户提升工作效率和生活品质",
+        "siteLink":"https://sspai.com/",
+        "feedLink":"https://sspai.com/feed"
+    },
+    {
         "title":"刘延栋的赛博空间",
         "id":2201012056,
         "des":"成一家之言，毕竟有言胜于无。",
@@ -47,5 +82,69 @@
         "des":"Weekly Swift articles, podcasts and tips by John Sundell",
         "siteLink":"https://www.swiftbysundell.com",
         "feedLink":"https://www.swiftbysundell.com/rss"
+    },
+    {
+        "title":"FIVE STARS",
+        "id":2201071601,
+        "des":"Exploring iOS, SwiftUI & much more.",
+        "siteLink":"https://www.fivestars.blog",
+        "feedLink":"https://www.fivestars.blog/feed.rss"
+    },
+    {
+        "title":"SwiftUI Weekly",
+        "id":2201081000,
+        "des":"The curated collection of links about SwiftUI. Delivered every Monday.",
+        "siteLink":"http://weekly.swiftwithmajid.com/",
+        "feedLink":"https://s3.amazonaws.com/revue/accounts/rss_feeds/000/057/272/original/rss_feed_57272.xml?1640019207"
+    },
+    {
+        "title":"Not Only Swift Weekly",
+        "id":2201081003,
+        "des":"Xcode tips & tricks, Swift, SwiftUI, Combine, Firebase, computing and internet history, and - of course - some fun stuff.",
+        "siteLink":"https://www.getrevue.co/profile/peterfriese",
+        "feedLink":"https://s3.amazonaws.com/revue/accounts/rss_feeds/000/298/465/original/rss_feed_298465.xml?1640361604"
+    },
+    {
+        "title":"SwiftlyRush Weekly",
+        "id":2201081004,
+        "des":"SwiftlyRush Weekly is a weekly curated publication full of interesting, relevant links, alongside industry news and updates. Subscribe now and never miss an issue.",
+        "siteLink":"https://swiftlyrush.curated.co/issues",
+        "feedLink":"https://swiftlyrush.curated.co/issues.rss"
+    },
+    {
+        "title":"iOS Dev Weekly",
+        "id":2201111118,
+        "des":"Subscribe to a hand-picked round-up of the best iOS development links every week. Curated by Dave Verwer and published every Friday. Free.",
+        "siteLink":"https://iosdevweekly.com/issues",
+        "feedLink":"https://iosdevweekly.com/issues.rss"
+    },
+    {
+        "title":"阮一峰的网络日志",
+        "id":2201111115,
+        "des":"Ruan YiFeng's Blog 科技爱好者周刊",
+        "siteLink":"https://www.ruanyifeng.com/blog/",
+        "feedLink":"https://www.ruanyifeng.com/blog/atom.xml"
+    },
+    {
+        "title":"The.Swift.Dev.",
+        "id":2201111537,
+        "des":"Weekly Swift articles",
+        "siteLink":"https://theswiftdev.com",
+        "feedLink":"https://theswiftdev.com/rss.xml"
+    },
+    {
+        "title":"爱范儿",
+        "id":2201121636,
+        "des":"让未来触手可及",
+        "siteLink":"https://www.ifanr.com",
+        "feedLink":"https://www.ifanr.com/feed"
+    },
+    {
+        "title":"机核",
+        "id":2201230924,
+        "des":"不止是游戏",
+        "siteLink":"https://www.gcores.com",
+        "feedLink":"https://www.gcores.com/rss"
     }
+    
 ]

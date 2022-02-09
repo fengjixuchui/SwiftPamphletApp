@@ -9,55 +9,53 @@ import Foundation
 
 struct SPC {
     static let gitHubAccessToken = "" // 在这里写上 Github 的access token。在 https://github.com/settings/tokens 申请你的access token。
-    static let gitHubAccessTokenJudge = true
     static let detailMinWidth: CGFloat = 450
     static let githubHost = "https://github.com/"
-    static let pamphletIssueRepoName = "ming1016/SwiftPamphletApp"
-    
-    static let timerForReposSec: Double = 60
-    static let timerForDevsSec: Double = 80
-    static let timerForExpSec: Double = 65
+    static let pamphletIssueRepoName = "KwaiAppTeam/SwiftPamphletApp"
+
+    static let timerForDevsSec: Double = 160
+    static let timerForExpSec: Double = 125
     static let timerForRssSec: Double = 60 * 60
-    
+
     static let unreadMagicNumber = 99999
-    
+
     static func loadCustomIssues(jsonFileName: String) -> [CustomIssuesModel] {
         let lc: [CustomIssuesModel] = loadBundleJSONFile(jsonFileName + ".json")
         return lc
     }
-    
+
     static func activeDevelopers() -> [SPActiveDevelopersModel] {
         let ad: [SPActiveDevelopersModel] = loadBundleJSONFile("developers.json")
         return ad
     }
-    
-    static func goodRepos() -> [SPReposModel] {
-        let re: [SPReposModel] = loadBundleJSONFile("goodrepos.json")
+
+    static func repos() -> [SPReposModel] {
+        let re: [SPReposModel] = loadBundleJSONFile("repos.json")
         return re
     }
-    
-    static func ilikedrepos() -> [SPReposModel] {
-        let re: [SPReposModel] = loadBundleJSONFile("ilikedrepos.json")
-        return re
-    }
-    
+
     static func rssFeed() -> [RSSFeedModel] {
         let re: [RSSFeedModel] = loadBundleJSONFile("rssfeed.json")
         return re
     }
-    
+
     static func rssStyle() -> String {
-        let data = loadBundleData("css.html")
+        let data = loadBundleData("css_cn.html")
         return String(data: data, encoding: .utf8) ?? ""
     }
     
+    static func rssFooterJS() -> String {
+        let data = loadBundleData("footer_js.html")
+        return String(data: data, encoding: .utf8) ?? ""
+    }
+
     static func outputRepo() {
-        let re = ilikedrepos()
+        let re = repos()
         for r in re {
             print("#### \(r.name)")
             for ar in r.repos {
                 let arr = ar.id.components(separatedBy: "/")
-                print("* [\(arr[1])](https://github.com/\(ar.id))  \(ar.des ?? "")")
+                print("* \(arr[1])：\(ar.des ?? "") (https://github.com/\(ar.id))")
             }
         }
     }
@@ -92,5 +90,3 @@ struct RSSFeedModel: Jsonable {
     var siteLink: String
     var feedLink: String
 }
-
-
