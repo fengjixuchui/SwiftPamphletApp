@@ -19,6 +19,9 @@ final class AppVM: ObservableObject {
     @Published var devsCountNotis = 0
     // 博客动态
     @Published var rssCountNotis = 0
+    
+    // MARK: - 库存档
+    @Published var archiveRepos = [SPReposModel]()
 
     // MARK: - CCY
     // 探索更多库
@@ -38,8 +41,39 @@ final class AppVM: ObservableObject {
     // 探索库
     private var stepCountExp = 0
     private var expNotisKeys = [String]()
+    
+    // MARK: - 获取 NSSplitViewController
+    func splitVC() -> NSSplitViewController {
+        return ((NSApp.keyWindow?.contentView?.subviews.first?.subviews.first?.subviews.first as? NSSplitView)?.delegate as? NSSplitViewController)!
+    }
+    
+    // MARK: - 全屏
+    func fullScreen(isEnter: Bool) {
+        if isEnter == true {
+            // 进入全屏
+            let presOptions:
+            NSApplication.PresentationOptions = ([.autoHideDock,.autoHideMenuBar])
+            let optionsDictionary = [NSView.FullScreenModeOptionKey.fullScreenModeApplicationPresentationOptions : NSNumber(value: presOptions.rawValue)]
+            
+            let v = splitVC().splitViewItems[2].viewController.view
+            v.enterFullScreenMode(NSScreen.main!, withOptions: optionsDictionary)
+            v.wantsLayer = true
+        } else {
+            // 退出全屏
+            NSApp.keyWindow?.contentView?.exitFullScreenMode()
+        } // end if
+    }
+    
+    // MARK: - Sidebar and LastView Toggle
+    func toggleSidebar() {
+        splitVC().toggleSidebar(self)
+    }
+    
+    func toggleLastView() {
+        splitVC().splitViewItems.last?.animator().isCollapsed.toggle()
+    }
 
-    // MARK: WebLink
+    // MARK: - WebLink
     @MainActor
     func updateWebLink(s: String) {
         webLinkStr = s
@@ -81,6 +115,11 @@ final class AppVM: ObservableObject {
     @MainActor
     func updateAlertMsg(msg: String) {
         alertMsg = msg
+    }
+    
+    // MARK: - 库存档
+    func loadArchiveRepos() {
+        archiveRepos = loadBundleJSONFile("archiveRepos.json")
     }
 
     // MARK: - 获取所有探索更多库通知信息
@@ -241,6 +280,8 @@ final class AppVM: ObservableObject {
         // 探索更多库
         loadDBExpLoal()
         loadExpFromServer()
+        // 库存档
+        loadArchiveRepos()
     }
 
     func refreshDev() {

@@ -17,6 +17,8 @@ struct RSSItemContentView: View {
             .onAppear {
                 vm.readContent(linkStr: rssItemModel.link, rssLinkStr: rssLink)
                 appVM.updateWebLink(s: rssItemModel.link)
+                appVM.rssUpdateNotis()
             }
+            .frame(minWidth: SPC.detailMinWidth)
     }
 }

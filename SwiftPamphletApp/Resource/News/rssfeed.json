@@ -7,13 +7,6 @@
         "feedLink":"https://www.swift.org/atom.xml"
     },
     {
-        "title":"Release notes from iOS-Weekly",
-        "id":2201080951,
-        "des":"老司机 iOS 周报",
-        "siteLink":"https://github.com/SwiftOldDriver/iOS-Weekly/releases",
-        "feedLink":"https://github.com/SwiftOldDriver/iOS-Weekly/releases.atom"
-    },
-    {
         "title":"iOS摸鱼周报",
         "id":2201071620,
         "des":"iOS 摸鱼周报",
@@ -33,13 +26,6 @@
         "des":"少数派致力于更好地运用数字产品或科学方法，帮助用户提升工作效率和生活品质",
         "siteLink":"https://sspai.com/",
         "feedLink":"https://sspai.com/feed"
-    },
-    {
-        "title":"刘延栋的赛博空间",
-        "id":2201012056,
-        "des":"成一家之言，毕竟有言胜于无。",
-        "siteLink":"https://liuyandong.com",
-        "feedLink":"https://liuyandong.com/feed"
     },
     {
         "title":"OneV's Den",
@@ -89,6 +75,13 @@
         "des":"Exploring iOS, SwiftUI & much more.",
         "siteLink":"https://www.fivestars.blog",
         "feedLink":"https://www.fivestars.blog/feed.rss"
+    },
+    {
+        "title":"Nil Coalescing",
+        "id":2207131436,
+        "des":"We are a software development company based in New Zealand passionate about iOS and macOS app development.",
+        "siteLink":"https://nilcoalescing.com/",
+        "feedLink":"https://nilcoalescing.com/feed.rss"
     },
     {
         "title":"SwiftUI Weekly",

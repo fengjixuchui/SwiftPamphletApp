@@ -19,23 +19,43 @@ struct SPSidebar: View {
                     SideBarLabel(title: "博客|资讯", imageName: "p21")
                         .badge(appVM.rssCountNotis)
                 }
+                
+                NavigationLink {
+                    DataSortingListView()
+                } label: {
+                    SideBarLabel(title: "资料整理", imageName: "p11")
+                }
             }
             Section("Github") {
-                NavigationLink {
-                    ExploreRepoListView()
-                } label: {
-                    SideBarLabel(title: "探索库", imageName: "p24")
-                        .badge(appVM.expCountNotis)
-
-                } // end NavigationLink
 
                 if SPC.gitHubAccessToken.isEmpty == false {
+                    NavigationLink {
+                        ExploreRepoListView(showAsGroup: false)
+                    } label: {
+                        SideBarLabel(title: "库动态", imageName: "p6")
+                            .badge(appVM.expCountNotis)
+
+                    } // end NavigationLink
+                    
                     NavigationLink(destination: ActiveDeveloperListView(vm: IssueVM(repoName: SPC.pamphletIssueRepoName, issueNumber: 30))) {
                         SideBarLabel(title: "开发者", imageName: "p5")
                             .badge(appVM.devsCountNotis)
                     } // end NavigationLink
 
                 } // end if
+                
+                NavigationLink {
+                    ExploreRepoListView(showAsGroup: true)
+                } label: {
+                    SideBarLabel(title: "探索库", imageName: "p24")
+                } // end NavigationLink
+                
+                NavigationLink {
+                    ExploreRepoListView(showAsGroup: true, isArchive: true)
+                } label: {
+                    SideBarLabel(title: "库存档", imageName: "p25")
+                }
+                
             } // end Section
 
             Section("Swift指南") {
@@ -52,6 +72,10 @@ struct SPSidebar: View {
                 }
             }
             Section("库使用指南") {
+                NavigationLink(destination: IssuesListFromCustomView(vm: IssueVM(guideName:"lib-SwiftUI"))) {
+                    SideBarLabel(title: "SwiftUI", imageName: "p3")
+                }
+                
                 NavigationLink(destination: IssuesListFromCustomView(vm: IssueVM(guideName:"lib-Combine"))) {
                     SideBarLabel(title: "Combine", imageName: "p19")
                 }
@@ -59,10 +83,7 @@ struct SPSidebar: View {
                 NavigationLink(destination: IssuesListFromCustomView(vm: IssueVM(guideName:"lib-Concurrency"))) {
                     SideBarLabel(title: "Concurrency", imageName: "p1")
                 }
-
-                NavigationLink(destination: IssuesListFromCustomView(vm: IssueVM(guideName:"lib-SwiftUI"))) {
-                    SideBarLabel(title: "SwiftUI", imageName: "p3")
-                }
+                
             }
 
 //            Section("个人") {

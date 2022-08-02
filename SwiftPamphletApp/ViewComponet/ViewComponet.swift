@@ -9,6 +9,74 @@ import SwiftUI
 import WebKit
 import MarkdownUI
 
+// MARK: - 大纲
+struct SPOutlineListView<D, Content>: View where D: RandomAccessCollection, D.Element: Identifiable, Content: View {
+    private let v: SPOutlineView<D, Content>
+    
+    init(d: D, c: KeyPath<D.Element, D?>, content: @escaping (D.Element) -> Content) {
+        self.v = SPOutlineView(d: d, c: c, content: content)
+    }
+    
+    var body: some View {
+        List {
+            v
+        }
+    }
+}
+
+struct SPOutlineView<D, Content>: View where D: RandomAccessCollection, D.Element: Identifiable, Content: View {
+    let d: D
+    let c: KeyPath<D.Element, D?>
+    let content: (D.Element) -> Content
+    @State var isExpanded = true // 控制初始是否展开的状态
+    
+    var body: some View {
+        ForEach(d) { i in
+            if let sub = i[keyPath: c] {
+                SPDisclosureGroup(content: SPOutlineView(d: sub, c: c, content: content), label: content(i))
+            } else {
+                content(i)
+            } // end if
+        } // end ForEach
+    } // end body
+}
+
+struct SPDisclosureGroup<C, L>: View where C: View, L: View {
+    @State var isExpanded = false
+    var content: C
+    var label: L
+    var body: some View {
+        DisclosureGroup(isExpanded: $isExpanded) {
+            content
+        } label: {
+            Button {
+                isExpanded.toggle()
+            } label: {
+                label
+            }
+            .buttonStyle(.plain)
+        }
+    }
+}
+
+// MARK: - 简化大纲
+struct DisclosureGroupLikeButton<C, L>: View where C: View, L: View {
+    @State var isExpanded = false
+    var content: () -> C
+    var label: () -> L
+    var body: some View {
+        DisclosureGroup(isExpanded: $isExpanded, content: content) {
+            HStack {
+                Button(action: {
+                    isExpanded.toggle()
+                }, label: label)
+                    .buttonStyle(.plain)
+            }
+        }
+    }
+}
+
+// MARK: - Sidebar Label
 struct SideBarLabel: View {
     var title: String
     var imageName: String
@@ -23,7 +91,7 @@ struct SideBarLabel: View {
     }
 }
 
-// MarkdownUI
+// MARK: - MarkdownUI
 struct MarkdownView: View {
     var s: String
     var body: some View {
@@ -32,7 +100,7 @@ struct MarkdownView: View {
     }
 }
 
-// 共享菜单
+// MARK: - 共享菜单
 struct ShareView: View {
     var s: String
     var body: some View {
@@ -61,6 +129,7 @@ struct ShareView: View {
     }
 }
 
+// MARK: - WebView
 struct WebView: NSViewRepresentable {
     let urlStr: String
 
@@ -88,6 +157,7 @@ struct WebUIView: NSViewRepresentable {
     }
 }
 
+// MARK: - Time
 struct GitHubApiTimeView: View {
     var timeStr: String
     var isUnread = false
@@ -119,6 +189,7 @@ struct FixAwfulPerformanceStyle: ButtonStyle {
     }
 }
 
+// MARK: - 图片
 struct AsyncImageWithPlaceholder: View {
     enum Size {
         case tinySize, smallSize,normalSize, bigSize
@@ -153,6 +224,7 @@ struct AsyncImageWithPlaceholder: View {
     }
 }
 
+// MARK: - 跳到 Github 网站
 struct ButtonGoGitHubWeb: View {
     var url: String
     var text: String

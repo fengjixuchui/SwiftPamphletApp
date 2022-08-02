@@ -17,6 +17,7 @@ struct GuideView: View {
             Spacer()
             Text(title).font(.title)
             Spacer()
+
             NavigationLink {
                 WebView(urlStr: "https://github.com/\(SPC.pamphletIssueRepoName)/issues/" + "\(number)")
             } label: {
@@ -28,5 +29,6 @@ struct GuideView: View {
             .onAppear {
                 appVM.updateWebLink(s: "https://github.com/\(SPC.pamphletIssueRepoName)/issues/" + "\(number)")
             }
+            .frame(minWidth: SPC.detailMinWidth)
     }
 }

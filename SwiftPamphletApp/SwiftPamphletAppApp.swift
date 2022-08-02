@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import InstrProfiling
 
 @main
 struct SwiftPamphletAppApp: App {
@@ -24,16 +25,60 @@ struct SwiftPamphletAppApp: App {
 struct Demo: View {
     var body: some View {
         Group {
-            TextView()
+//            V()
+//            PlayCharts()
+//            PlayTextView()
+//            PlayLinkView()
+//            PlayLabelView()
+//            PlayTextEditorView()
+//            PlayTextFieldView()
+//            PlayButtonView()
+//            PlayStackView()
+//            PlayFormView()
+//            PlayToggleView()
+//            PlayListView()
+//            PlayControlGroupView()
+//            PlayGroupBoxView()
+//            PlayNavigationView()
+//            PlayLazyVStackAndLazyHStackView()
+//            PlayProgressView()
+//            PlayImageView()
+//            PlayLazyVGridAndLazyHGridView()
+//            PlayScrollView()
+//            PlaySuperposedLayerView()
+//            PlayTabView()
+//            PlayPickerView()
+//            PlaySliderView()
+//            PlayColor()
+//            PlayEffect()
+//            PlayKeyboard()
+//            PlayAnimation()
+//            PlayCanvas()
+            
         }
-        .frame(minWidth:300, minHeight: 550)
+        .frame(minWidth:300, maxWidth: .infinity, minHeight: 550, maxHeight: .infinity)
         .onAppear {
 
         }
     }
 }
 
+struct V: View {
+    
+    @StateObject var appVM = AppVM()
+    @State var isEnterFullScreen: Bool = false // 全屏控制
+    var body: some View {
+        Button {
+            isEnterFullScreen.toggle()
+            appVM.fullScreen(isEnter: isEnterFullScreen)
+        } label: {
+            Image(systemName: isEnterFullScreen == true ? "arrow.down.right.and.arrow.up.left" : "arrow.up.left.and.arrow.down.right")
+        }
+    }
+}
+
 struct SwiftPamphletApp: View {
+    
     @StateObject var appVM = AppVM()
     @State var sb = Set<AnyCancellable>()
     @State var alertMsg = ""
@@ -55,7 +100,6 @@ struct SwiftPamphletApp: View {
                             vm.doing(.notiEvent)
                         }
                     }
-                    appVM.rssUpdateNotis() // 定时更新博客未读数
                 })
                 .onReceive(timerForExp) { _ in
                     if SPC.gitHubAccessToken.isEmpty == false {
@@ -72,22 +116,12 @@ struct SwiftPamphletApp: View {
 
         } // end NavigationView
         .frame(minHeight: 650)
-        .navigationTitle("戴铭的 Swift 小册子")
+        .navigationTitle("戴铭的开发小册子")
         .navigationSubtitle(appVM.alertMsg)
         .toolbar {
-//            ToolbarItem(placement: ToolbarItemPlacement.navigation) {
-//                Menu {
-//                    Text("Ops！发现这里了")
-//                    Text("彩蛋下个版本见")
-//                    Text("隐藏彩蛋1")
-//                    Text("隐藏彩蛋2")
-//                } label: {
-//                    Label("Label", systemImage: "slider.horizontal.3")
-//                }
-//            }
             ToolbarItem(placement: ToolbarItemPlacement.navigation) {
                 Button {
-                    NSApp.keyWindow?.firstResponder?.tryToPerform(#selector(NSSplitViewController.toggleSidebar(_:)), with: nil)
+                    appVM.toggleSidebar()
                 } label: {
                     Label("Sidebar", systemImage: "sidebar.left")
                 }
@@ -104,11 +138,16 @@ struct SwiftPamphletApp: View {
                         Text("用浏览器打开")
                     } // end Button
                 } // end if
+                
+                Button {
+                    appVM.toggleLastView()
+                } label: {
+                    Label("LastView", systemImage: "sidebar.right")
+                } // end Button
 
             } // end ToolbarItemGroup
         } // end .toolbar
         .environmentObject(appVM)
-
     }
 }
 
@@ -118,17 +157,23 @@ protocol Jsonable : Identifiable, Decodable, Hashable {}
 class AppDelegate: NSObject, NSApplicationDelegate {
     var window: NSWindow!
     var op: String?
+    
     func applicationDidFinishLaunching(_ notification: Notification) {
         print("-- AppDelegate Section --")
 
+        
+//        AutoTask.buildContentMarkdownFile()
+        
 //        PlaySecurity.keyChain()
 
 //        PlayArchitecture.error()
 //        PlayArchitecture.codable()
 
 //        PlaySyntax.hashable()
+//        PlaySyntax.resultBuilder()
 //        PlaySyntax.dynamicCallable()
 //        PlaySyntax.dynamicMemberLookup()
+//        PlaySyntax.function()
 //        PlaySyntax.method()
 //        PlaySyntax.property()
 //        PlaySyntax.generics()
@@ -153,4 +198,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 //        self.window.makeKey()
     }
+    
+    func applicationWillTerminate(_ notification: Notification) {
+//        codeCoverageProfrawDump()
+    }
+    
 }
